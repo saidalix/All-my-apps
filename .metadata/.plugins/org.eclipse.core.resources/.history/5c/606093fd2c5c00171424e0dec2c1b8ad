@@ -1,0 +1,74 @@
+package com.slau.landm;
+
+import com.slau.landmanagement.R;
+import com.slau.landmanagement.RegisterActivity.RegisterTask;
+
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.app.Activity;
+import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+
+public class Register extends Activity {
+	//private ProgressDialog pleaseWaitDialog;
+			TextView status;
+			Button register;
+			EditText nameEdt,usernameEdt,passwordEdt;
+			public static final String server="http://10.0.2.2/android/add.php";
+			String name="",username="",password="",log="";
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.register);
+        nameEdt=(EditText) findViewById(R.id.name_edt);
+		usernameEdt=(EditText) findViewById(R.id.username_edit);
+		passwordEdt=(EditText) findViewById(R.id.password_edit);
+		status=(TextView) findViewById(R.id.status);
+		register=(Button) findViewById(R.id.submit_button);
+		register.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				name=nameEdt.getText().toString().trim();
+				username=usernameEdt.getText().toString().trim();
+				password=passwordEdt.getText().toString().trim();
+				if(!name.equals("") && !username.equals("") && !password.equals("")){
+				         new RegisterTask().execute();//connect to the server
+				}else{
+					status.setText("All fields are required");
+				}
+				
+			}
+		});
+        
+    }
+    
+    private class RegisterTask extends AsyncTask<String, String, String>{
+		 @Override
+	      protected void onPreExecute() {
+			 status.setText("Signing up...");
+			
+		         }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.register, menu);
+        return true;
+    }
+
+
+	@Override
+	protected String doInBackground(String... params) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+    
+}

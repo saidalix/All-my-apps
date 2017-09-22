@@ -1,0 +1,31 @@
+package com.slau.landmanagement;
+
+import com.lesx.travelbus.R;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+
+public class Login extends Activity {
+	TextView status;
+	Button register;
+	EditText usernameEdt,passwordEdt;
+	public static final String server="http://10.0.2.2/android/login.php";
+   String username="",password="",log="";
+   
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.login);
+		
+		usernameEdt=(EditText) findViewById(R.id.username_edit);
+		passwordEdt=(EditText) findViewById(R.id.password_edit);
+		status=(TextView) findViewById(R.id.status);
+		register=(Button) findViewById(R.id.submit_button);
+		
+	}
+
+}
